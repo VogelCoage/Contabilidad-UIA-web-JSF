@@ -1,54 +1,30 @@
-package uia.com.contabilidad.proveedores;
+package uia.com.contabilidad.compras;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import model.ClienteJSF;
 import uia.com.contabilidad.clientes.InfoUIA;
-import uia.com.contabilidad.cuentas.Cuenta;
 
-public class Proveedor extends InfoUIA
-{
-	
-	Double saldo = 0.0;
-	Cuenta miCuenta = null;
+public class Compra extends InfoUIA{
 	private ArrayList<ClienteJSF> listaJSF = null;
 	private ArrayList<String> listaNames = null;
 	
 	@JsonCreator
-    public Proveedor(@JsonProperty("id")int id, @JsonProperty("name")String name, @JsonProperty("saldo")double p1) 
+    public Compra(@JsonProperty("id")int id, @JsonProperty("name")String name) 
 	{
         super(id, name);
         super.type =  this. getClass(). getSimpleName();        
-        this.saldo = p1;
     }
-
-	public Double getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(Double saldo) {
-		this.saldo = saldo;
-	}
-
-	public void validaCobranza() 
-	{
-			getItems().forEach(t->
-	 				{
-	 					t.validaCobranza();
-		 			}
-	 				);
-		
-	}
 	
 	public ArrayList<ClienteJSF> getLista()
 	{
 		//return super.getItems();
 		
+		//modificado
 		//ClienteJSF cliente = null;
 		if(listaJSF != null) {
 			((List<ClienteJSF>) listaJSF).clear();
@@ -67,7 +43,7 @@ public class Proveedor extends InfoUIA
 		return listaJSF;
 	}
 	
-	public ArrayList<ClienteJSF> getListaItems(){
+	public ArrayList<ClienteJSF> getListaCuentas(){
 		//ClienteJSF cliente = null;
 		if(listaJSF != null) {
 			listaJSF = new ArrayList<ClienteJSF>();
@@ -88,8 +64,7 @@ public class Proveedor extends InfoUIA
 	
 	public ArrayList<String> getListaNames() 
 	{
-		//ClienteJSF cliente = null;
-		
+		//ClienteJSF cliente = null;		
 		if(listaNames == null)
 		{		
 			listaNames = new ArrayList<String>();
@@ -113,5 +88,4 @@ public class Proveedor extends InfoUIA
 		}
 		return listaNames;
 	}
-
 }

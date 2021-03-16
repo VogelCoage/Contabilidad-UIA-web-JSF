@@ -2,8 +2,8 @@ package uia.com.contabilidad.gestor;
 
 import java.util.ArrayList;
 
+import model.ClienteJSF;
 import uia.com.contabilidad.clientes.InfoUIA;
-import uia.com.presentacion.ClienteJSP;
 
 public class DecoradorProveedores extends Decorador {
 	
@@ -22,8 +22,12 @@ public class DecoradorProveedores extends Decorador {
 		super.Print();
 	}
 
-	public ArrayList<ClienteJSP> getLista()
+	public ArrayList<ClienteJSF> getLista()
 	{
 		return super.getLista();
+	}
+	
+	public ArrayList<String> getListaNames() {
+		return super.getListaNames();
 	}
 }

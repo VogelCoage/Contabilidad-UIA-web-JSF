@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
+import model.ClienteJSF;
 import uia.com.contabilidad.cheques.Cheque;
 import uia.com.contabilidad.cheques.NotaDebito;
-import uia.com.contabilidad.clientes.Cliente;
+//import uia.com.contabilidad.clientes.Cliente;
 import uia.com.contabilidad.cuentas.Cuenta;
 import uia.com.contabilidad.proveedores.Proveedor;
-import uia.com.presentacion.ClienteJSP;
 
 
 @JsonTypeInfo(
@@ -35,6 +35,7 @@ public abstract class InfoUIA implements IInfoUIA{
 	private String estado;
 	protected String type;
 	protected List<InfoUIA> items;
+	protected List<InfoUIA> items2;
 	
 	
 	public String getType() {
@@ -85,6 +86,8 @@ public abstract class InfoUIA implements IInfoUIA{
 	public void setItems(List<InfoUIA> items) {
 		this.items =  items;
 	}
+	
+	
 
 	public void validaCobranza()
 	{
@@ -103,8 +106,8 @@ public abstract class InfoUIA implements IInfoUIA{
 		
 	}
 
-	public ClienteJSP getClienteJSP() {
-		ClienteJSP item = new ClienteJSP(this.getName(), this.getId(), this.getEstado());
+	public ClienteJSF getClienteJSP() {
+		ClienteJSF item = new ClienteJSF(this.getName(), this.getId(), this.getEstado(), this.getItems());
 		return item;
 	}
 	

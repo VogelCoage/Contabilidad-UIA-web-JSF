@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import = "uia.com.contabilidad.ContabilidadUIA.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,33 +10,39 @@
 <title>Clientes</title>
 </head>
 <body>
-	<h1>Página de Proveedores</h1>
+	<h1>Clientes</h1>
 	
 	<jsp:useBean id = "contabilidad" class = "uia.com.contabilidad.ContabilidadUIA"></jsp:useBean>
-	<!--  La idea es que en este formulario se envíe el id del proveedor seleccionado a clientes.jsp -->
-	<form name = "formClientes" id= "form1" action="clientes.jsp" method = "post">
-		Proveedor: <select name = "cliente">
-		<c:forEach var = "cliente" items = "${contabilidad.getListaProveedores()}">
-			<option value = "${cliente.id}"> ${cliente.name}</option>
-		</c:forEach>
-		</select>
-		<input type = "submit" value = "Submit">
-	</form>
 	
-	<form name = "formCuentas" id = "form2" action="/cuentas.jsp">
-		Cuenta: <select name = "cuenta">
-		<c:forEach var = "cuenta" items = "${contabilidad.getListaCuentas()}">
-			<option value = "${cuenta.id}"> ${cuenta.name}</option>
-		</c:forEach>
-		</select>
-		<input type = "submit" value = "Submit">
-	</form>
+	<table border=1>
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Id</th>
+                <th>Compras</th>
+                <th>Cuentas</th>
+                <th>Cheques</th>
+                <th colspan=2>Mantenimiento</th>
+            </tr>
+        </thead>
+        
+        <tbody>          
+        	<c:forEach var="cliente" items="${contabilidad.getListaProveedores()}">
+                <tr>
+                    <td><c:out value="${cliente.name}" /></td>
+                    <td><c:out value="${cliente.id}" /></td>
+                    <td><a href="ClienteController?action=verCompras&clienteName=<c:out value="${cliente.name}"/>">Ver</a></td>
+                    <td><a href="ClienteController?action=verCuentas&clienteName=<c:out value="${cliente.name}"/>">Ver</a></td>
+                    <td><a href="ClienteController?action=verCheques&clienteName=<c:out value="${cliente.name}"/>">Ver</a></td>
+                    <td><a href="ClienteController?action=Actualiza&clienteName=<c:out value="${cliente.name}"/>">Actualizar</a></td>
+                    <td><a href="ClienteController?action=Borra&clienteName=<c:out value="${cliente.name}"/>">Borrar</a></td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 	
-	<form name = "formCheques" id = "form2" action = "/cuentas.jsp">
-		Cheque: <select name = "cuenta">
-		</select>
-		<input type = "submit" value = "Submit">
-	</form>
+	<p><a href="ClienteController?action=insert">Agregar Cliente</a></p>
+	
 	
 	
 	<jsp:useBean id = "date" class = "java.util.Date"/>

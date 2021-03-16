@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import model.ClienteJSF;
 import uia.com.contabilidad.clientes.InfoUIA;
-import uia.com.presentacion.ClienteJSP;
 
 public class Decorador implements IGestor {
 
@@ -16,7 +16,8 @@ public class Decorador implements IGestor {
 	ArrayList <InfoUIA> lista = new ArrayList<InfoUIA>();
 	protected String ancestro="";
 	protected String nombre="";
-	ArrayList <ClienteJSP> listaJSP = new ArrayList<ClienteJSP>();
+	ArrayList <ClienteJSF> listaJSP = new ArrayList<ClienteJSF>();
+	ArrayList <String> listaNames = new ArrayList<String>();
 
 	public Decorador()
 	{	
@@ -24,16 +25,16 @@ public class Decorador implements IGestor {
 	}
 	
 	
-	public ArrayList<ClienteJSP> getLista() 
+	public ArrayList<ClienteJSF> getLista() 
 	{
-		ClienteJSP cliente = null;
+		ClienteJSF cliente = null;
 		
 		if(listaJSP != null)
 		{
 			listaJSP.clear();
 		}
 		else
-			listaJSP = new ArrayList<ClienteJSP>();
+			listaJSP = new ArrayList<ClienteJSF>();
 		
 		if (catalogo != null) {
         
@@ -191,6 +192,29 @@ private void carga(String tipo, List<InfoUIA> subCatalogo, String nombre)
 	public void setCatalogo(Map<String, InfoUIA> p) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public ArrayList<String> getListaNames() {
+		ClienteJSF cliente = null;
+		
+		if(listaNames != null)
+		{
+			listaNames.clear();
+		}
+		else
+			listaNames = new ArrayList<String>();
+		
+		if (catalogo != null) {
+        
+			System.out.println("----- Catalogo -----");
+			
+
+            for (Map.Entry<String, InfoUIA> entry : catalogo.entrySet()) {
+    			cliente = entry.getValue().getClienteJSP();
+    			listaNames.add(cliente.getName());
+            }
+        }
+		return listaNames;
 	}
 	
 }
